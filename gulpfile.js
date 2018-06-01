@@ -8,10 +8,10 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload');
 
 // file paths
-const stylePath = {src: 'src/static/sass/*.sass', dest: 'dist/static/css'};
-const htmlPath = {src: 'src/*.pug', dest: 'dist'};
-const scriptPath = {src: 'src/static/js/*.js', dest: 'dist/static/js'};
-const imagePath = {src: 'src/static/images/**', dest: 'dist/static/images'};
+const stylePath = {src: 'src/static/sass/*.sass', dest: 'docs/static/css'};
+const htmlPath = {src: 'src/*.pug', dest: 'docs'};
+const scriptPath = {src: 'src/static/js/*.js', dest: 'docs/static/js'};
+const imagePath = {src: 'src/static/images/**', dest: 'docs/static/images'};
 
 // default task
 gulp.task('default', ['sass', 'pug', 'js', 'images', 'server', 'watch']);
@@ -20,7 +20,7 @@ gulp.task('build', ['sass', 'pug', 'js', 'images']);
 // gulp-connect
 gulp.task('server', function() {
   connect.server({
-    root: 'dist',
+    root: 'docs',
     livereload: true,
     port: 4000
   });
