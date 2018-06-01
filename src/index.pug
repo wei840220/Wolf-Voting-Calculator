@@ -1,0 +1,74 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title 那邊的狼兒，跟我去算選票！
+    link(rel='shortcut icon', href='/static/favicon.ico', type='image/x-icon')
+    link(rel='icon', href='/static/favicon.ico', type='image/x-icon')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css')
+    link(rel='stylesheet prefetch', href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700')
+    link(rel='stylesheet prefetch', href='https://use.fontawesome.com/releases/v5.0.13/css/all.css', integrity='sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp', crossorigin='anonymous')
+    link(rel='stylesheet prefetch', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+    link(rel='stylesheet prefetch', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css')
+    link(rel='stylesheet', href='static/css/style.css')
+
+  body
+    .container
+      #app.bg-light.container-fluid.my-5.rounded
+        .title.pt-4.pb-5
+          h1.text-center 那邊的狼兒，跟我去算選票！
+        #dashboard
+          .input-group
+            textarea.form-control(placeholder='在這裡貼上整個投票結果表格（包含幾日目第幾回）' v-model='text')
+            .input-group-append
+              button.btn.btn-primary(type='submit' @click='insertData') 送出
+          template(v-if='timeData.length')
+            .w-100
+              .badge.badge-info.mr-2.align-text-top 顯示回數
+              .form-check.form-check-inline.my-2(v-for='data in timeData')
+                input.form-check-input(type='checkbox' v-model='data.show')
+                label.form-check-label(for='"checkbox-" + data.dt') {{data.dt}}
+            .w-100
+              .badge.badge-danger.mr-2.align-text-top 顯示死者
+              .form-check.form-check-inline.my-2
+                input.form-check-input(type='checkbox' v-model='showDead')
+        #viewer.pt-1.pb-1
+          table.table-bordered.table-sm(v-if='timeData.length')
+            thead
+              tr
+                th(rowspan='2') #
+                th(colspan='2' v-for='data in timeData' v-show='data.show') {{data.dt}}
+              tr
+                template(v-for='data in timeData' v-if='data.show')
+                  th.cursor-pointer(@click='sortVoteDataByPropName(data.day, data.time, "votes")')
+                    .d-flex 
+                      .w-100 票
+                      .flex-shrink-0
+                        i.icon-sort.fas.fa-sort
+                  th.cursor-pointer(@click='sortVoteDataByPropName(data.day, data.time, "target")')
+                    .d-flex 
+                      .w-100 投
+                      .flex-shrink-0
+                        i.icon-sort.fas.fa-sort
+            tbody
+              tr(v-for='user in userData' :key='user' v-show='showDead || aliveData[user].dt == currentTime.dt')
+                th(scope='row') {{user}}
+                template(v-for='(data, index) in voteData[user]')
+                  td(nowrap='nowrap' v-show='timeData[index].show') {{data.votes}}
+                  td(nowrap='nowrap' v-show='timeData[index].show') {{data.target}}
+          .question.pt-5.pb-2.d-flex.justify-content-end
+            a.text-info.cursor-pointer(@click='showHowToUse')
+              i.fas.fa-question-circle
+
+    footer.fixed-bottom.bg-dark.text-light.text-center
+      .d-inline-flex.px-lg-3.px-md-2.px-1 [關於]
+        a.mx-2.text-danger(href='https://diam.ngct.net/index.php') 汝等是人是狼
+        |計票小工具
+      .d-md-inline-flex.d-none.px-lg-3.px-md-2.px-1 [參考]
+        a.mx-2.text-danger(href='http://nedftp.com/wiki/index.php?title=其他') 投票紀錄器 (克洛製作)
+      .d-inline-flex.px-lg-3.px-md-2.px-1 [程式] 小柴豆
+        a.mx-2.text-danger(href='https://diam.ngct.net/trip.php?go=trip&id=hV2fxMYMXQ') @鑽石
+
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js')
+    script(src='static/js/index.js')
