@@ -124,6 +124,8 @@ var app = new Vue({
       arr.forEach(function(data){
         var str = data.replace(/	/i, ' ').replace(/	/g, ' ');
         var s = str.split(' ');
+        if (s.indexOf('') > 0)
+          s.splice(s.indexOf(''), 1);
         if (s[0]!='')
           voteData.push({
             id: s[0],
