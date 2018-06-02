@@ -48,7 +48,7 @@
 
      http://app.diam.nctu.me/
 
- - 測資（來源：[汝等是人是狼 - 66016村](https://diam.ngct.net/old_log.php?log_mode=on&room_no=66016) ）
+ - 測資（來源：[汝等是人是狼 - 66016村](https://diam.ngct.net/old_log.php?log_mode=on&room_no=66016&reverse_log=on) ）
 
      - 二日目第一回
 
