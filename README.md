@@ -28,6 +28,8 @@
 
 - [Vue.js] - A JavaScript framework for building interactive web applications.
 - [Bootstrap 4] - An HTML, CSS, and JavaScript framework.
+- [Pug] - A template engine implemented with JavaScript for Node.js and browsers.
+- [Sass] - A stable extension to classic CSS.
 - [Gulp] - A toolkit for automating and streamlining web development.
 
 ## 環境
