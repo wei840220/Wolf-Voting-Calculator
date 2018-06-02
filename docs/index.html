@@ -25,7 +25,7 @@
               <button class="btn btn-primary" type="submit" @click="insertData">送出</button>
             </div>
           </div>
-          <template v-if="timeData.length">
+          <template v-if="active">
             <div class="w-100">
               <div class="badge badge-info mr-2 align-text-top">顯示回數</div>
               <div class="form-check form-check-inline my-2" v-for="data in timeData">
@@ -42,7 +42,7 @@
           </template>
         </div>
         <div class="pt-1 pb-1" id="viewer">
-          <table class="table-bordered table-sm" v-if="timeData.length">
+          <table class="table-bordered table-sm" v-if="active">
             <thead>
               <tr>
                 <th rowspan="2">#</th>

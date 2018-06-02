@@ -22,7 +22,7 @@ html(lang='en')
             textarea.form-control(placeholder='在這裡貼上整個投票結果表格（包含幾日目第幾回）' v-model='text')
             .input-group-append
               button.btn.btn-primary(type='submit' @click='insertData') 送出
-          template(v-if='timeData.length')
+          template(v-if='active')
             .w-100
               .badge.badge-info.mr-2.align-text-top 顯示回數
               .form-check.form-check-inline.my-2(v-for='data in timeData')
@@ -33,7 +33,7 @@ html(lang='en')
               .form-check.form-check-inline.my-2
                 input.form-check-input(type='checkbox' v-model='showDead')
         #viewer.pt-1.pb-1
-          table.table-bordered.table-sm(v-if='timeData.length')
+          table.table-bordered.table-sm(v-if='active')
             thead
               tr
                 th(rowspan='2') #

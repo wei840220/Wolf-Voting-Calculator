@@ -10,16 +10,23 @@ var app = new Vue({
     currentTime: {},
     text: ''
   },
+  computed: {
+    active: function () {
+      return this.timeData.length;
+    }
+  },
   methods: {
     insertData: function(){
       var self = this;
       try {
         var data = self._getDatafromString();
-        self._appendUserData(data.userData);
-        self._updateCurrentTime(data.timeData);
-        self._appendTimeData(data.timeData);
-        self._appendVoteData(data.voteData);
-        self._updateAliveData(data.timeData.day, data.timeData.time , data.userData);
+        if (!self._isTimeRepeat(data.timeData.dt)){
+          self._appendUserData(data.userData);
+          self._updateCurrentTime(data.timeData);
+          self._appendTimeData(data.timeData);
+          self._appendVoteData(data.voteData);
+          self._updateAliveData(data.timeData.day, data.timeData.time, data.userData);
+        }
       }
       catch (e) {
         swal('QQ，似乎有點問題', '請再確認投票結果的複製格式是否正確');
@@ -27,6 +34,13 @@ var app = new Vue({
       finally {
         self.text = '';
       }
+    },
+    _isTimeRepeat: function(dt){
+      var self = this;
+      for (var idx = 0; idx < self.timeData.length; idx++)
+        if (self.timeData[idx].dt == dt)
+          return true;
+      return false;
     },
     _updateCurrentTime: function(data){
       var self = this;
