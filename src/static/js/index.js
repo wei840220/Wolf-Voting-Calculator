@@ -142,9 +142,9 @@ var app = new Vue({
           s.splice(s.indexOf(''), 1);
         if (s[0]!='')
           voteData.push({
-            id: s[0],
-            votes: parseInt(s[1]),
-            target: s[s.length-1]
+            id: s.slice(0, s.indexOf('投票給') - 2).join(' '),
+            votes: parseInt(s[s.indexOf('投票給') - 2]),
+            target: s.slice(s.indexOf('投票給') + 4).join(' ')
           });
       });
       return voteData;
