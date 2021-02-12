@@ -135,17 +135,14 @@ var app = new Vue({
     },
     _getVotesfromString: function(arr){
       var voteData = [];
-      arr.forEach(function(data){
-        var str = data.replace(/	/i, ' ').replace(/	/g, ' ');
-        var s = str.split(' ');
-        if (s.indexOf('') > 0)
-          s.splice(s.indexOf(''), 1);
-        if (s[0]!='')
-          voteData.push({
-            id: s.slice(0, s.indexOf('投票給') - 2).join(' '),
-            votes: parseInt(s[s.indexOf('投票給') - 2]),
-            target: s.slice(s.indexOf('投票給') + 4).join(' ')
-          });
+      arr.forEach(function(str){
+        var re = /^(.*)(	\d+ 票	)(投票給 \d+ 票 →	)?(.*)$/;
+        var matches = str.match(re);
+        voteData.push({
+          id: matches[1],
+          votes: parseInt(matches[2].match(/\d+/)[0]),
+          target: matches[4]
+        });
       });
       return voteData;
     },
