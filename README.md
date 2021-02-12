@@ -2,6 +2,8 @@
 
 網頁遊戲 [汝等是人是狼](https://diam.ngct.net/index.php) 的計票小工具。協助玩家觀察遊戲過程中的散投、集火等投票情形。
 
+測試請參考 [Demo](https://github.com/wei840220/Wolf-Voting-Calculator#demo) 部分測資。
+
 ## 功能
 
 - 匯入票單，並與記錄整合
@@ -49,6 +51,8 @@
  - 網址
 
      https://wei840220.github.io/Wolf-Voting-Calculator/
+
+     ![demo](docs/static/images/demo.gif)
 
  - 測資（來源：[汝等是人是狼 - 66016村](https://diam.ngct.net/old_log.php?log_mode=on&room_no=66016&reverse_log=on) ）
 
